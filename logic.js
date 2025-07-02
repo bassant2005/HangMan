@@ -89,7 +89,8 @@ document.addEventListener("click", (e) => {
                 gameStateDiv.innerHTML = `<h3 style="color:red">Game Over! The word was "${randomV}"</h3>`;
                 gameEnded = true;
 
-                // 👇 Wrap in a setTimeout to force async execution right after DOM change
+                // Wrap in a setTimeout to force async execution right after DOM change
+                // Delay a little to ensure DOM update first
                 setTimeout(() => {
                     failSound.play().catch(e => console.log("Fail sound error:", e));
                 }, 100);
@@ -107,7 +108,6 @@ document.addEventListener("click", (e) => {
                 gameStateDiv.innerHTML = `<h3 style="color:green">🎉 You Won! (★‿★)</h3>`;
                 gameEnded = true;
 
-                // 👇 Same: Delay a little to ensure DOM update first
                 setTimeout(() => {
                     winSound.play().catch(e => console.log("Win sound error:", e));
                 }, 100);
