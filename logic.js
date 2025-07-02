@@ -13,22 +13,55 @@ array.forEach(letter =>{
 
 // random category & random word
 const wordsMap = {
-  movies: ["The Godfather","Titanic", "Forrest Gump", "Pulp Fiction",
-      "The Dark Knight", "Inception", "Avengers: Endgame",
-      "Jurassic Park", "Star Wars", "The Matrix", "Toy Story",
-      "Gladiator", "Rocky", "The Shawshank Redemption",
-      "Back to the Future", "Iron Man", "Spider Man", "Frozen",
-      "Top Gun", "The Lion King"],
-  countries: ["Egypt", "France", "Japan", "Brazil", "Germany",
-      "India", "Canada"],
-  animals: ["lion", "tiger", "elephant", "cat", "dog", "panda", "giraffe"],
-  fruits: ["apple", "banana", "grape", "mango","orange", "watermelon", "peach"],
-  colors: ["red", "blue", "green", "yellow", "purple","orange","black"],
-  sports: ["football", "basketball", "tennis", "cricket", "swimming","volleyball"],
-  verbs: ["run", "jump", "think", "write", "read", "sing", "dance"],
-  tools: ["hammer", "screwdriver", "wrench", "saw", "drill", "pliers", "tape"],
+  movies: ["Frozen", "The Lion King", "Ratatouille"],
+  countries: ["Egypt", "Korea", "France"],
+  animals: ["lion", "panda", "cat"],
+  fruits: ["apple", "banana", "mango"],
+  colors: ["red", "blue", "yellow"],
+  sports: ["football", "tennis", "swimming"],
+  actors: ["Tom Hanks", "Emma Watson", "Will Smith"]
 };
 
+const hintsMap = {
+  movies: [
+    "snow",                // Frozen
+    "Jungle animals",        // The Lion King
+    "Chef"     // Ratatouille
+  ],
+  countries: [
+    "7000 year",         // Egypt
+    "Drama",       // Korea
+    "City of lights"                // France
+  ],
+  animals: [
+    "King of the jungle",           // lion
+    "Black and white",         // panda
+    "domestic pet"           // cat
+  ],
+  fruits: [
+    "Keeps the doctor away",        // apple
+    "Yellow and curved",            // banana
+    "Orange, green or red"            // mango
+  ],
+  colors: [
+    "love",                // red
+    "sky",                 // blue
+    "Bright and sunny"              // yellow
+  ],
+  sports: [
+    "goal",           // football
+    "Racquet game",                 // tennis
+    "Water"     // swimming
+  ],
+  actors: [
+    "Forrest Gump",            // Tom Hanks
+    "Hermione",              // Emma Watson
+    "Men in Black"             // Will Smith
+  ]
+};
+
+
+// => the game flow
 let keys = Object.keys(wordsMap)
 let randomPN = Math.floor(Math.random() * keys.length)
 let randomP = keys[randomPN]
@@ -37,7 +70,6 @@ let randomVN = Math.floor(Math.random() * Values.length)
 let randomV = Values[randomVN]
 
 document.querySelector(".game-info .category span").innerHTML = randomP
-
 
 // guessing area
 let guesses = document.querySelector(".letters-guess")
@@ -65,6 +97,8 @@ let gameStateDiv = document.querySelector(".game-state");
 let failSound = document.getElementById("fail-sound");
 let winSound = document.getElementById("win-sound");
 let gameEnded = false;
+const playAgainBtn = document.getElementById("play-again");
+let hint = hintsMap[randomP][randomVN];
 
 document.addEventListener("click", (e) => {
     if (gameEnded) return;
@@ -85,8 +119,14 @@ document.addEventListener("click", (e) => {
             wrong++;
             draw.classList.add(`wrong-${wrong}`);
 
+            if (wrong === 6) {
+                gameStateDiv.innerHTML = `<h2 style="color: navy">💡 Hint: ${hint}</h2>`;
+            }
+
             if (wrong === 7) {
-                gameStateDiv.innerHTML = `<h3 style="color:red">Game Over! The word was "${randomV}"</h3>`;
+                gameStateDiv.innerHTML = `<h2 style="color:red">Game Over! The word was "${randomV}"</h2>`;
+                gameStateDiv.appendChild(playAgainBtn);
+                playAgainBtn.style.display = "inline-block";
                 gameEnded = true;
 
                 // Wrap in a setTimeout to force async execution right after DOM change
@@ -105,7 +145,9 @@ document.addEventListener("click", (e) => {
             });
 
             if (allRevealed) {
-                gameStateDiv.innerHTML = `<h3 style="color:green">🎉 You Won! (★‿★)</h3>`;
+                gameStateDiv.innerHTML = `<h2 style="color:green">🎉 You Won! (★‿★)</h2>`;
+                gameStateDiv.appendChild(playAgainBtn);
+                playAgainBtn.style.display = "inline-block";
                 gameEnded = true;
 
                 setTimeout(() => {
@@ -117,7 +159,10 @@ document.addEventListener("click", (e) => {
 });
 
 
-
+// reloading the game (reset the page)
+playAgainBtn.addEventListener("click", () => {
+    location.reload();
+});
 
 
 

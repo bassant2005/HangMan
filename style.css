@@ -282,4 +282,29 @@ div .letters {
     display: block;
 }
 
+/*end of the game*/
+.game-state{
+    margin-left: 2%;
+    margin-top: 1%;
+}
 
+#play-again{
+    border-radius: 20%;
+    border: 3px dashed teal;
+    background-color: cadetblue;
+    color: navy;
+    font-size: 25px;
+    padding: 1%;
+    box-shadow: 0 10px 15px teal;
+    margin-left: 45%;
+    cursor: pointer;
+}
+
+#play-again:hover{
+    color: lightblue;
+}
+
+#play-again:active{
+    background-color: lightblue ;
+    color: cadetblue;
+}
