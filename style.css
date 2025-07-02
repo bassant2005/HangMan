@@ -11,10 +11,6 @@ body {
     padding: 2%;
 }
 
-h3{
-    text-align: center;
-}
-
 .row,
 .game-info {
     display: flex;
@@ -36,7 +32,11 @@ hr {
 
 .game-info .category span{
     color: navy;
-    font-size: 20px;
+    font-size: 30px;
+}
+
+h2{
+    text-align: center;
 }
 
 /*draw area*/
