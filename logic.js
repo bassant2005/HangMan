@@ -87,7 +87,7 @@ document.addEventListener("click", (e) => {
             if (wrong === 7) {
                 // 💀 GAME OVER
                 gameStateDiv.innerHTML = `<h3 style="color:red">Game Over! The word was "${randomV}"</h3>`;
-                failSound.play();
+                failSound.play().catch(e => console.log("Fail sound error:", e));
                 gameEnded = true;
             }
         } else {
@@ -101,7 +101,7 @@ document.addEventListener("click", (e) => {
 
             if (allRevealed) {
                 gameStateDiv.innerHTML = `<h3 style="color:green">🎉 You Won! (★‿★)</h3>`;
-                winSound.play();
+                winSound.play().catch(e => console.log("Win sound error:", e));
                 gameEnded = true;
             }
         }
