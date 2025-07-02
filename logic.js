@@ -67,7 +67,7 @@ let winSound = document.getElementById("win-sound");
 let gameEnded = false;
 
 document.addEventListener("click", (e) => {
-    if (gameEnded) return; //enable any new clicks
+    if (gameEnded) return;
 
     if (e.target.classList.contains('letter-box') && !e.target.classList.contains('clicked')) {
         e.target.classList.add("clicked");
@@ -84,11 +84,15 @@ document.addEventListener("click", (e) => {
         if (!choiceState) {
             wrong++;
             draw.classList.add(`wrong-${wrong}`);
+
             if (wrong === 7) {
-                // 💀 GAME OVER
                 gameStateDiv.innerHTML = `<h3 style="color:red">Game Over! The word was "${randomV}"</h3>`;
-                failSound.play().catch(e => console.log("Fail sound error:", e));
                 gameEnded = true;
+
+                // 👇 Wrap in a setTimeout to force async execution right after DOM change
+                setTimeout(() => {
+                    failSound.play().catch(e => console.log("Fail sound error:", e));
+                }, 100);
             }
         } else {
             // ✅ Check for win
@@ -101,12 +105,17 @@ document.addEventListener("click", (e) => {
 
             if (allRevealed) {
                 gameStateDiv.innerHTML = `<h3 style="color:green">🎉 You Won! (★‿★)</h3>`;
-                winSound.play().catch(e => console.log("Win sound error:", e));
                 gameEnded = true;
+
+                // 👇 Same: Delay a little to ensure DOM update first
+                setTimeout(() => {
+                    winSound.play().catch(e => console.log("Win sound error:", e));
+                }, 100);
             }
         }
     }
 });
+
 
 
 
