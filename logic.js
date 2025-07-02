@@ -64,10 +64,11 @@ let draw = document.querySelector(".hangman-draw");
 let gameStateDiv = document.querySelector(".game-state");
 let failSound = document.getElementById("fail-sound");
 let winSound = document.getElementById("win-sound");
-let correctSound = document.getElementById("correct-sound");
-let wrongSound = document.getElementById("wrong-sound");
+let gameEnded = false;
 
 document.addEventListener("click", (e) => {
+    if (gameEnded) return; //enable any new clicks
+
     if (e.target.classList.contains('letter-box') && !e.target.classList.contains('clicked')) {
         e.target.classList.add("clicked");
         let clickedLetter = e.target.innerHTML.toLowerCase();
@@ -83,15 +84,13 @@ document.addEventListener("click", (e) => {
         if (!choiceState) {
             wrong++;
             draw.classList.add(`wrong-${wrong}`);
-            wrongSound.play(); // 🔊 Wrong sound
             if (wrong === 7) {
                 // 💀 GAME OVER
                 gameStateDiv.innerHTML = `<h3 style="color:red">Game Over! The word was "${randomV}"</h3>`;
                 failSound.play();
+                gameEnded = true;
             }
         } else {
-            correctSound.play(); // 🔊 Correct sound
-
             // ✅ Check for win
             let allRevealed = true;
             wordLetters.forEach((letter, index) => {
@@ -103,6 +102,7 @@ document.addEventListener("click", (e) => {
             if (allRevealed) {
                 gameStateDiv.innerHTML = `<h3 style="color:green">🎉 You Won! (★‿★)</h3>`;
                 winSound.play();
+                gameEnded = true;
             }
         }
     }
