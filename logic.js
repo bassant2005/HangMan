@@ -1,5 +1,5 @@
 // letters box
-const letters = "abcdefghigklmnopqrstuvwxyz0123456789";
+const letters = "abcdefghijklmnopqrstuvwxyz0123456789";
 let array = Array.from(letters)
 let container = document.querySelector(".letters")
 array.forEach(letter =>{
