@@ -1,6 +1,6 @@
 // letters box
 let Eletters = "abcdefghijklmnopqrstuvwxyz";
-let ALetters = "أبتثجحخدذرزسشصضطظعغفقكلمنهويءؤةى";
+let ALetters = "أابتثجحخدذرزسشصضطظعغفقكلمنهويءؤةى";
 Eletters = Array.from(Eletters)
 ALetters = Array.from(ALetters)
 
