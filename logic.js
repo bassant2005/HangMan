@@ -1,168 +1,240 @@
 // letters box
-const letters = "abcdefghijklmnopqrstuvwxyz0123456789";
-let array = Array.from(letters)
-let container = document.querySelector(".letters")
-array.forEach(letter =>{
-    let span = document.createElement("span")
-    let theLetter = document.createTextNode(letter)
-    span.appendChild(theLetter)
-    span.className = "letter-box"
-    container.appendChild(span)
-})
+let Eletters = "abcdefghijklmnopqrstuvwxyz";
+let ALetters = "أبتثجحخدذرزسشصضطظعغفقكلمنهويءؤةى";
+Eletters = Array.from(Eletters)
+ALetters = Array.from(ALetters)
 
-
-// random category & random word
-const wordsMap = {
-  movies: ["Frozen", "The Lion King", "Ratatouille"],
-  countries: ["Egypt", "Korea", "France"],
-  animals: ["lion", "panda", "cat"],
-  fruits: ["apple", "banana", "mango"],
-  colors: ["red", "blue", "yellow"],
-  sports: ["football", "tennis", "swimming"],
-  actors: ["Tom Hanks", "Emma Watson", "Will Smith"]
+// Game maps
+const wordsMapE = {
+  countries: ["Egypt", "Korea", "France", "Japan", "Italy", "Canada"],
+  animals: ["lion", "panda", "cat", "elephant", "tiger", "giraffe"],
+  fruits: ["apple", "banana", "mango", "orange", "grape", "strawberry"],
+  colors: ["red", "blue", "yellow", "green", "purple", "black"],
+  sports: ["football", "tennis", "swimming", "basketball", "volleyball", "boxing"],
 };
 
-const hintsMap = {
-  movies: [
-    "snow",                // Frozen
-    "Jungle animals",        // The Lion King
-    "Chef"     // Ratatouille
-  ],
+const hintsMapE = {
   countries: [
-    "7000 year",         // Egypt
-    "Drama",       // Korea
-    "City of lights"                // France
+    "7000 year",        // Egypt
+    "Drama",            // Korea
+    "City of lights",   // France
+    "Anime & sushi",    // Japan
+    "Pizza & pasta",    // Italy
+    "Maple leaf"        // Canada
   ],
   animals: [
-    "King of the jungle",           // lion
-    "Black and white",         // panda
-    "domestic pet"           // cat
+    "King of the jungle",   // lion
+    "Black and white",      // panda
+    "Domestic pet",         // cat
+    "Has trunk",            // elephant
+    "Striped big cat",      // tiger
+    "Long neck"             // giraffe
   ],
   fruits: [
-    "Keeps the doctor away",        // apple
-    "Yellow and curved",            // banana
-    "Orange, green or red"            // mango
+    "Keeps the doctor away",    // apple
+    "Yellow and curved",        // banana
+    "Orange, green or red",     // mango
+    "Citrus fruit",             // orange
+    "Tiny and purple",          // grape
+    "Red, sweet and small"      // strawberry
   ],
   colors: [
-    "love",                // red
-    "sky",                 // blue
-    "Bright and sunny"              // yellow
+    "Love",             // red
+    "Sky",              // blue
+    "Bright and sunny", // yellow
+    "Nature",           // green
+    "Royal",            // purple
+    "Darkest"           // black
   ],
   sports: [
-    "goal",           // football
-    "Racquet game",                 // tennis
-    "Water"     // swimming
+    "Goal",                 // football
+    "Racquet game",         // tennis
+    "Water",                // swimming
+    "Basket",               // basketball
+    "Net game",             // volleyball
+    "Fighting sport"        // boxing
   ],
-  actors: [
-    "Forrest Gump",            // Tom Hanks
-    "Hermione",              // Emma Watson
-    "Men in Black"             // Will Smith
+};
+
+const WordsMapA = {
+  "الدول": ["مصر", "فرنسا", "اليابان", "إيطاليا", "ألمانيا", "البرازيل"],
+  "الحيوانات": ["قطة", "أسد", "باندا", "فيل", "نمر", "زرافة"],
+  "الفواكه": ["تفاح", "موز", "مانجو", "عنب", "برتقال", "فراولة"],
+  "الألوان": ["أحمر", "أزرق", "أصفر", "أخضر", "أسود", "بنفسجي"],
+  "الرياضة": ["كرة القدم", "تنس", "سباحة", "كرة سلة", "ملاكمة", "كرة طائرة"],
+  "الأفلام": ["فروزن", "الأسد الملك", "راتاتوي", "كوكو", "إنسايد آوت", "المنتقمون"]
+};
+
+const HintsMapA = {
+  "الدول": [
+    "نهر النيل",      // مصر
+    "برج إيفل",       // فرنسا
+    "أنمي وسوشي",     // اليابان
+    "بيتزا ومكرونة",  // إيطاليا
+    "سيارات وعلوم",   // ألمانيا
+    "كرة القدم والاحتفالات" // البرازيل
+  ],
+  "الحيوانات": [
+    "تحب الحليب",     // قطة
+    "ملك الغابة",     // أسد
+    "أبيض وأسود",     // باندا
+    "له خرطوم",       // فيل
+    "مخطط ومفترس",    // نمر
+    "رقبة طويلة"      // زرافة
+  ],
+  "الفواكه": [
+    "أحمر ومفيد",      // تفاح
+    "أصفر ومنحني",     // موز
+    "أخضر أو برتقالي", // مانجو
+    "صغير وبنفسجي",    // عنب
+    "حمضي وبرتقالي",   // برتقال
+    "أحمر ولذيذ"       // فراولة
+  ],
+  "الألوان": [
+    "لون الحب",        // أحمر
+    "لون السماء",      // أزرق
+    "لون الشمس",       // أصفر
+    "لون الطبيعة",     // أخضر
+    "غامق جدًا",       // أسود
+    "لون ملكي"         // بنفسجي
+  ],
+  "الرياضة": [
+    "هدف",             // كرة القدم
+    "مضرب وكرة",       // تنس
+    "ماء",             // سباحة
+    "سلة",             // كرة سلة
+    "قتال",            // ملاكمة
+    "شبكة"             // كرة طائرة
   ]
 };
 
+// setting game mode
+const englishBtn = document.getElementById("english-btn");
+const arabicBtn = document.getElementById("arabic-btn");
 
-// => the game flow
-let keys = Object.keys(wordsMap)
-let randomPN = Math.floor(Math.random() * keys.length)
-let randomP = keys[randomPN]
-let Values = wordsMap[randomP]
-let randomVN = Math.floor(Math.random() * Values.length)
-let randomV = Values[randomVN]
+englishBtn.addEventListener("click", () => {
+  setGame(Eletters,wordsMapE,hintsMapE);
+  englishBtn.style.display = "none";
+  arabicBtn.style.display = "none";
+});
 
-document.querySelector(".game-info .category span").innerHTML = randomP
-
-// guessing area
-let guesses = document.querySelector(".letters-guess")
-let wordLetters = Array.from(randomV)
-wordLetters.forEach(letter => {
-    let spaceSpan = document.createElement("span")
-    if (letter === ' '){
-        spaceSpan.className = "space"
-    }
-    guesses.appendChild(spaceSpan)
-})
+arabicBtn.addEventListener("click", () => {
+  setGame(ALetters,WordsMapA,HintsMapA);
+document.querySelector(".letters-guess").setAttribute("dir", "rtl");
+document.querySelector(".letters").setAttribute("dir", "rtl");  arabicBtn.style.display = "none";
+  englishBtn.style.display = "none";
+});
 
 
-// Count non-space letters
-let letterCount = randomV.split('').filter(c => c !== ' ').length;
-document.querySelector(".no\\.letters span").innerHTML = letterCount;
+function setGame(letters,wordsMap,hintsMap){
+    let container = document.querySelector(".letters")
+    letters.forEach(letter =>{
+        let span = document.createElement("span")
+        let theLetter = document.createTextNode(letter)
+        span.appendChild(theLetter)
+        span.className = "letter-box"
+        container.appendChild(span)
+    })
+
+    // Pick random word
+    const keys = Object.keys(wordsMap);
+    const randomPN = Math.floor(Math.random() * keys.length);
+    const randomP = keys[randomPN];
+    const values = wordsMap[randomP];
+    const randomVN = Math.floor(Math.random() * values.length);
+    const randomV = values[randomVN];
+    const hint = hintsMap[randomP][randomVN];
+
+    document.querySelector(".game-info .category span").innerHTML = randomP
+
+    // guessing area
+    let guesses = document.querySelector(".letters-guess")
+    let wordLetters = Array.from(randomV)
+    wordLetters.forEach(letter => {
+        let spaceSpan = document.createElement("span")
+        if (letter === ' '){
+            spaceSpan.className = "space"
+        }
+        guesses.appendChild(spaceSpan)
+    })
 
 
-// clicking the letters & the game states
-let guessesSpan = document.querySelectorAll(".letters-guess span");
-let choiceState = false;
-let wrong = 0;
-let draw = document.querySelector(".hangman-draw");
-let gameStateDiv = document.querySelector(".game-state");
-let failSound = document.getElementById("fail-sound");
-let winSound = document.getElementById("win-sound");
-let gameEnded = false;
-const playAgainBtn = document.getElementById("play-again");
-let hint = hintsMap[randomP][randomVN];
+    // Count non-space letters
+    document.querySelector(".no\\.letters span").innerHTML = randomV.split('').filter(c => c !== ' ').length;
 
-document.addEventListener("click", (e) => {
-    if (gameEnded) return;
+    // clicking the letters & the game states
+    let guessesSpan = document.querySelectorAll(".letters-guess span");
+    let choiceState = false;
+    let wrong = 0;
+    let draw = document.querySelector(".hangman-draw");
+    let gameStateDiv = document.querySelector(".game-state");
+    let failSound = document.getElementById("fail-sound");
+    let winSound = document.getElementById("win-sound");
+    let gameEnded = false;
+    const playAgainBtn = document.getElementById("play-again");
 
-    if (e.target.classList.contains('letter-box') && !e.target.classList.contains('clicked')) {
-        e.target.classList.add("clicked");
-        let clickedLetter = e.target.innerHTML.toLowerCase();
-        choiceState = false;
+    document.addEventListener("click", (e) => {
+        if (gameEnded) return;
 
-        wordLetters.forEach((wordLetter, index) => {
-            if (clickedLetter === wordLetter.toLowerCase()) {
-                choiceState = true;
-                guessesSpan[index].innerHTML = wordLetter.toUpperCase();
-            }
-        });
+        if (e.target.classList.contains('letter-box') && !e.target.classList.contains('clicked')) {
+            e.target.classList.add("clicked");
+            let clickedLetter = e.target.innerHTML.toLowerCase();
+            choiceState = false;
 
-        if (!choiceState) {
-            wrong++;
-            draw.classList.add(`wrong-${wrong}`);
-
-            if (wrong === 6) {
-                gameStateDiv.innerHTML = `<h2 style="color: navy">💡 Hint: ${hint}</h2>`;
-            }
-
-            if (wrong === 7) {
-                gameStateDiv.innerHTML = `<h2 style="color:red">Game Over! The word was "${randomV}"</h2>`;
-                gameStateDiv.appendChild(playAgainBtn);
-                playAgainBtn.style.display = "inline-block";
-                gameEnded = true;
-
-                // Wrap in a setTimeout to force async execution right after DOM change
-                // Delay a little to ensure DOM update first
-                setTimeout(() => {
-                    failSound.play().catch(e => console.log("Fail sound error:", e));
-                }, 100);
-            }
-        } else {
-            // ✅ Check for win
-            let allRevealed = true;
-            wordLetters.forEach((letter, index) => {
-                if (letter !== ' ' && guessesSpan[index].innerHTML === "") {
-                    allRevealed = false;
+            wordLetters.forEach((wordLetter, index) => {
+                if (clickedLetter === wordLetter.toLowerCase()) {
+                    choiceState = true;
+                    guessesSpan[index].innerHTML = wordLetter.toUpperCase();
                 }
             });
 
-            if (allRevealed) {
-                gameStateDiv.innerHTML = `<h2 style="color:green">🎉 You Won! (★‿★)</h2>`;
-                gameStateDiv.appendChild(playAgainBtn);
-                playAgainBtn.style.display = "inline-block";
-                gameEnded = true;
+            if (!choiceState) {
+                wrong++;
+                draw.classList.add(`wrong-${wrong}`);
 
-                setTimeout(() => {
-                    winSound.play().catch(e => console.log("Win sound error:", e));
-                }, 100);
+                if (wrong === 6) {
+                    gameStateDiv.innerHTML = `<h2 style="color: navy">💡 Hint: ${hint}</h2>`;
+                }
+
+                if (wrong === 7) {
+                    gameStateDiv.innerHTML = `<h2 style="color:red">Game Over! The word was "${randomV}"</h2>`;
+                    gameStateDiv.appendChild(playAgainBtn);
+                    playAgainBtn.style.display = "inline-block";
+                    gameEnded = true;
+
+                    // Wrap in a setTimeout to force async execution right after DOM change
+                    // Delay a little to ensure DOM update first
+                    setTimeout(() => {
+                        failSound.play().catch(e => console.log("Fail sound error:", e));
+                    }, 100);
+                }
+            } else {
+                // ✅ Check for win
+                let allRevealed = true;
+                wordLetters.forEach((letter, index) => {
+                    if (letter !== ' ' && guessesSpan[index].innerHTML === "") {
+                        allRevealed = false;
+                    }
+                });
+
+                if (allRevealed) {
+                    gameStateDiv.innerHTML = `<h2 style="color:green">🎉 You Won! (★‿★)</h2>`;
+                    gameStateDiv.appendChild(playAgainBtn);
+                    playAgainBtn.style.display = "inline-block";
+                    gameEnded = true;
+
+                    setTimeout(() => {
+                        winSound.play().catch(e => console.log("Win sound error:", e));
+                    }, 100);
+                }
             }
         }
-    }
-});
+    });
 
+    // reloading the game (reset the page)
+    playAgainBtn.onclick = () => location.reload();
+}
 
-// reloading the game (reset the page)
-playAgainBtn.addEventListener("click", () => {
-    location.reload();
-});
 
 
 

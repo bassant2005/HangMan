@@ -37,20 +37,20 @@ hr {
 
 h2{
     text-align: center;
+    align-items: center;
+    position: relative;
 }
 
 /*draw area*/
 .hangman-draw {
     background: teal;
     margin: 1%;
-    padding-left: 10%;
     padding-top: 2%;
-    height: 325px;
 }
 
 .hangman-draw .the-draw {
-    width: 60px;
-    height: 280px;
+    width: 40px;
+    height: 250px;
     border-bottom: 5px solid lightblue;
     position: relative;
     margin-left: 10%;
@@ -101,14 +101,14 @@ h2{
     border-radius: 50%;
     left: 85px;
     top: 35px;
-    border: 5px dashed lightblue;
+    border: 5px dashed cadetblue;
 }
 
 .hangman-draw .man .head {
-    width: 70px;
-    height: 70px;
-    left: 89px;
-    top: 40px;
+    width: 75px;
+    height: 75px;
+    left: 87px;
+    top: 36px;
     background-image: url("effects/Emoji.png");
     background-size: cover;
 }
@@ -117,7 +117,7 @@ h2{
     width: 50px;
     height: 70px;
     border-radius: 15%;
-    left: 97px;
+    left: 96px;
     top: 100px;
     border: 5px solid lightblue;
 }
@@ -143,7 +143,7 @@ h2{
 }
 
 .hangman-draw .man .hands::before{
-    left: 143px;
+    left: 142px;
 }
 
 .hangman-draw .man .hands::after{
@@ -151,7 +151,7 @@ h2{
 }
 
 .hangman-draw .man .legs::before{
-    left: 120px;
+    left: 121px;
 }
 
 .hangman-draw .man .legs::after{
@@ -178,7 +178,8 @@ div .letters {
 .letters{
     padding: 1%;
     text-align: center;
-    font-size: 40px;
+    font-size: 30px;
+
 }
 
 .letters .letter-box{
@@ -186,10 +187,12 @@ div .letters {
     height: 10%;
     display: inline-block;
     background-color: lightblue;
-    margin: 1%;
-    line-height: 75%;
+    padding: 0.5%;
+    line-height: 70%;
     text-transform: uppercase;
     cursor: pointer;
+    margin-bottom: 1%;
+    margin-left: 1%;
 }
 
 .letters .letter-box.clicked{
@@ -288,23 +291,24 @@ div .letters {
     margin-top: 1%;
 }
 
-#play-again{
+button{
     border-radius: 20%;
     border: 3px dashed teal;
     background-color: cadetblue;
     color: navy;
     font-size: 25px;
     padding: 1%;
+    width: 20%;
     box-shadow: 0 10px 15px teal;
-    margin-left: 45%;
+    margin-left: 40%;
     cursor: pointer;
 }
 
-#play-again:hover{
+button:hover{
     color: lightblue;
 }
 
-#play-again:active{
+button:active{
     background-color: lightblue ;
     color: cadetblue;
 }

@@ -15,7 +15,16 @@
                     <h2>Word from: <span></span></h2>
                 </div>
             </div>
-            <HR>
+
+            <hr>
+            <div class="game-state">
+                <button id="english-btn">in English</button>
+                <button id="arabic-btn">بالعربية</button>
+                <audio id="fail-sound" src="effects/losing.mp3" preload="auto"></audio>
+                <audio id="win-sound" src="effects/win.mp3" preload="auto"></audio>
+                <button id="play-again" style="display: none;">Play Again</button>
+            </div>
+
             <div class="row">
                 <div class="hangman-draw">
                     <div class="the-draw">
@@ -30,17 +39,13 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="letters">
                     <div class="no.letters">this guess has <span></span> letters</div>
                     <div class="letters-guess"></div>
                 </div>
             </div>
-            <hr>
-            <div class="game-state">
-                <audio id="fail-sound" src="effects/losing.mp3" preload="auto"></audio>
-                <audio id="win-sound" src="effects/win.mp3" preload="auto"></audio>
-                <button id="play-again" style="display: none;">Play Again</button>
-            </div>
+            <HR>
         </div>
     <script src="logic.js"></script>
     </body>
