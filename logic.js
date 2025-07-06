@@ -193,7 +193,7 @@ function setGame(letters,wordsMap,hintsMap){
                 draw.classList.add(`wrong-${wrong}`);
 
                 if (wrong === 6) {
-                    gameStateDiv.innerHTML = `<h2 style="color: navy">💡 Hint: ${hint}</h2>`;
+                    gameStateDiv.innerHTML = `<h2>💡 Hint: ${hint}</h2>`;
                 }
 
                 if (wrong === 7) {
@@ -234,6 +234,19 @@ function setGame(letters,wordsMap,hintsMap){
     // reloading the game (reset the page)
     playAgainBtn.onclick = () => location.reload();
 }
+
+// dark mode
+    const toggleButton = document.getElementById("dark-mode-toggle");
+        toggleButton.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+
+        if (document.body.classList.contains("dark-mode")) {
+          toggleButton.textContent = "☀️";
+        } else {
+          toggleButton.textContent = "🌙";
+        }
+     });
+
 
 
 

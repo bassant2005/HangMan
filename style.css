@@ -4,6 +4,10 @@ body {
     margin: 0;
 }
 
+h2 span{
+    color: navy;
+}
+
 .container {
     margin: 2%;
     background: lightblue;
@@ -105,11 +109,11 @@ h2{
 }
 
 .hangman-draw .man .head {
-    width: 75px;
-    height: 75px;
-    left: 87px;
-    top: 36px;
-    background-image: url("effects/Emoji.png");
+    width: 50px;
+    height: 50px;
+    left: 100px;
+    top: 50px;
+    background-image: url("effects/depressed.png");
     background-size: cover;
 }
 
@@ -292,8 +296,8 @@ div .letters {
 }
 
 button{
-    border-radius: 20%;
-    border: 3px dashed teal;
+    border-radius: 10%;
+    border: 2px dashed teal;
     background-color: cadetblue;
     color: navy;
     font-size: 25px;
@@ -301,6 +305,7 @@ button{
     width: 20%;
     box-shadow: 0 10px 15px teal;
     margin-left: 40%;
+    margin-bottom: 1%;
     cursor: pointer;
 }
 
@@ -311,4 +316,123 @@ button:hover{
 button:active{
     background-color: lightblue ;
     color: cadetblue;
+}
+
+
+/*dark mode*/
+body.dark-mode {
+    background: #1e1e1e;
+    color: #e0e0e0;
+}
+
+body.dark-mode .container {
+    background: #2e2e2e;
+    color: #d3d3d3;
+}
+
+body.dark-mode .game-info .category span,
+body.dark-mode .no\.letters span,
+body.dark-mode .letters-guess span {
+    color: chocolate;
+}
+
+body.dark-mode .hangman-draw {
+    background: #1e1e1e;
+}
+
+body.dark-mode .hangman-draw .the-draw {
+    border-bottom: 5px solid chocolate;
+}
+
+body.dark-mode .hangman-draw .stand::before,
+body.dark-mode .hangman-draw .hang::before,
+body.dark-mode .hangman-draw .hang::after,
+body.dark-mode .hangman-draw .man .body,
+body.dark-mode .hangman-draw .man .hands::before,
+body.dark-mode .hangman-draw .man .hands::after,
+body.dark-mode .hangman-draw .man .legs::before,
+body.dark-mode .hangman-draw .man .legs::after {
+    background-color: chocolate;
+    border-color: chocolate;
+}
+
+body.dark-mode .hangman-draw .man .body{
+        background-color: transparent;
+}
+
+body.dark-mode .hangman-draw .rope {
+    border: 5px dashed lightcoral;
+}
+
+body.dark-mode .letters {
+    background-color: #1e1e1e;
+    color: #1e1e1e;
+}
+
+body.dark-mode .letters .letter-box {
+    background-color: chocolate;
+    color: white;
+}
+
+body.dark-mode .letters .letter-box.clicked {
+    background-color: #696969;
+    color: #a9a9a9;
+}
+
+body.dark-mode .no\.letters {
+    background-color: #2e2e2e;
+    color: #d3d3d3;
+}
+
+body.dark-mode .letters-guess {
+    background-color: #2e2e2e;
+}
+
+body.dark-mode .letters-guess span {
+    border-bottom: 3px solid #a9a9a9;
+}
+
+body.dark-mode button {
+    background-color: chocolate;
+    color: #f0f8ff;
+    border: 2px dashed lightcoral;
+    box-shadow: 0 10px 15px chocolate;
+}
+
+body.dark-mode button:hover {
+    color: #2e2e2e;
+    background-color: lightcoral;
+}
+
+body.dark-mode button:active {
+    background-color: #2e2e2e;
+    color: lightcoral;
+}
+
+body.dark-mode .hangman-draw .man .head {
+    width: 50px;
+    height: 50px;
+    left: 100px;
+    top: 55px;
+    background-image: url("effects/emoji.png");
+    background-size: cover;
+    z-index: 10;
+}
+
+body.dark-mode h2 span{
+    color: chocolate;
+}
+
+#dark-mode-toggle{
+    background: transparent;
+    border-radius: 0;
+    border: none;
+    padding: 0;
+    width: 0;
+    box-shadow: none;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-bottom: 0;
+    top: 0;
+    cursor: pointer;
 }
